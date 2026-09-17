@@ -18,15 +18,32 @@ description: Cross-platform 3D reconstruction skill for KIRI Engine. Triggers wh
   - 示例 1（macOS/Linux）：`Kiri it /Users/kiri/Pictures/Shoes_Photos`
   - 示例 2（Windows）：`Kiri it C:\Users\kiri\Pictures\Shoes_Photos`
   - 示例 3：`3D this file /Users/kiri/Videos/Sculpture.mp4`
+  - 示例 4（Antigravity 专属联动）：`/browser Kiri it /Users/kiri/Videos/Sculpture.mp4`
 - 或明确要求使用 KIRI Engine 对某组照片或某个视频进行 3D 建模/三维重建。
+
+---
+
+## 🌐 Antigravity 默认执行机制：联动 `/browser` 专属能力
+
+在 Google Antigravity 中执行本 Skill 时，**默认设置调用 `/browser` 专属能力**：
+1. **职责划分**：
+   - **本地端**：主 Agent 执行媒体格式与时长轻量校验（`validate_media.py` / `validate_media.ps1`），并通过交互式点击菜单（`ask_question`）确认用户重建模式与导出参数；
+   - **网页端**：默认调用 Antigravity 的 `/browser` 专属能力接管内置浏览器，直接进行 DOM 级自动化操作：
+     - 自动检测 `https://www.kiriengine.app/webapp` 登录状态（未登录自动弹出登录框）；
+     - 自动进入 `https://www.kiriengine.app/webapp/mymodel`；
+     - 自动定位模式入口，向 `<input type="file">` 控件注入本地文件完成真实上传；
+     - 自动根据用户配置勾选 Mesh 格式、背景抠除、Train AI 与可见性，并点击提交。
+2. **会话级自适应**：
+   - 若当前会话已有浏览器工具权限，直接自动操控上传；
+   - 若当前会话尚未加载浏览器工具，Agent 默认联动并推荐使用 `/browser` 命令（如 `/browser Kiri it <path>`），以激活完整的浏览器自动化工具链。
 
 ---
 
 ## 执行步骤与规范流程
 
-### 步骤 1：验证浏览器 KIRI 账号登录状态
+### 步骤 1：调用 `/browser` 专属能力验证 KIRI 账号登录状态
 
-在执行耗时的上传前，必须首先确认用户已在内置浏览器中登录 KIRI 账号：
+在执行上传前，默认联动 `/browser` 能力检查内置浏览器登录状态：
 
 1. **访问/检查页面**：
    - 打开或检查浏览器当前页面：`https://www.kiriengine.app/webapp` 或 `https://www.kiriengine.app/webapp/mymodel`。
@@ -87,12 +104,13 @@ Agent 在执行校验前，可快速检查环境：
 
 ---
 
-### 步骤 4：进入 WebApp 对应入口并上传文件
+### 步骤 4：通过 `/browser` 专属能力进入 WebApp 并自动上传文件
 
-1. 在浏览器中导航到：
-   `https://www.kiriengine.app/webapp/mymodel`
-2. 点击页面上的新建扫描或对应选定模式入口（`Photo Scan` / `Featureless Object Scan` / `3DGS Scan with Mesh`）。
-3. 调出上传控件，将步骤 2 中已验证通过的文件或文件夹内全部照片上传。
+在 Antigravity 中，默认由 `/browser` 自动化执行以下操作（若当前会话未开启浏览器工具，则自动启动或提示 `/browser`）：
+1. 浏览器导航至：`https://www.kiriengine.app/webapp/mymodel`
+2. 自动化定位并点击新建扫描入口（按步骤 3 选定的 `Photo Scan` / `Featureless Object Scan` / `3DGS Scan with Mesh`）。
+3. 定位页面上的文件上传控件（`<input type="file">`），将步骤 2 中已验证通过的文件或文件夹内全部媒体自动注入并开始上传。
+4. 监控上传进度直至 100% 完成。
 
 ---
 

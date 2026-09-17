@@ -41,7 +41,7 @@ KIRI-Skill/
 
 ## 🚀 安装与配置
 
-### 1. 在 Google Antigravity 中使用
+### 1. 在 Google Antigravity 中使用（默认联动 `/browser` 专属能力）
 
 - **当前项目使用**：将本仓库保留在项目目录或 `.agents/skills/kiri-engine-3d/` 中。
 - **全局安装（所有项目通用）**：
@@ -55,6 +55,13 @@ KIRI-Skill/
     New-Item -ItemType Directory -Force -Path "$HOME\.gemini\config\skills"
     Copy-Item -Recurse -Force "C:\Users\kiri\Developer\AI\KIRI-Skill" "$HOME\.gemini\config\skills\kiri-engine-3d"
     ```
+- **🌟 默认浏览器交互方式**：
+  在 Antigravity 中，本 Skill **默认联动 `/browser` 专属能力**，用于自动探测登录、自动进入 `/webapp/mymodel` 并向网页 `<input type="file">` 注入本地文件完成自动化上传与点击。
+  用户可以直接输入：
+  ```text
+  /browser Kiri it /Users/kiri/Videos/Sculpture.mp4
+  ```
+  或者直接发送 `Kiri it <path>`，Agent 会自动调用 `/browser` 专属工具链协同执行！
 
 ### 2. 在 Claude Code 中使用
 
