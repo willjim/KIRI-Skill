@@ -23,9 +23,12 @@
 2. **DOM 元素**：
    - 未登录页特征：包含输入框 `input[type="email"]`、`#googleBtn`、`#apple-sign-in` 或 "Log in" / "Sign in" 按钮。
    - 已登录页特征：包含 "Upload" / "New Scan" 按钮、用户头像、积分/额度显示及模型列表。
-3. **未登录处理策略**：
+3. **未登录处理策略与防早退机制 (Anti-Premature Exit)**：
    - 导航至 `https://www.kiriengine.app/webapp`。
-   - 明确提示用户：“检测到尚未登录 KIRI Engine 账号。已为您打开登录页面，请在内置浏览器窗口中完成登录/注册后回复我继续。”
+   - **防止 Codex/CLI 误杀浏览器**：
+     - 若通过系统命令打开，必须使用系统脱钩命令（Windows: `Start-Process`，macOS: `open`，Linux: `nohup`），避免终端子 Shell 退出时连带杀掉浏览器。
+     - 若通过 Playwright/Puppeteer 打开，必须使用 `page.wait_for_url("**/mymodel**", timeout=300000)` 阻塞等待用户在浏览器中完成登录，严禁脚本立刻退出导致浏览器被垃圾回收析构。
+   - 明确提示用户：“检测到尚未登录 KIRI Engine 账号。已为您打开登录页面，请在浏览器窗口中完成登录/注册后回复我继续。”
    - 等待用户确认登录成功后再执行后续上传流程。
 
 ---

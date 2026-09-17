@@ -14,9 +14,21 @@ Activate this workflow when the user says:
 
 ## Operational Steps
 
-1. **Verify KIRI Engine Account Status**:
+1. **Verify KIRI Engine Account Status (Anti-Closing & Detached Launch)**:
    - Check if the user is authenticated at `https://www.kiriengine.app/webapp` or `https://www.kiriengine.app/webapp/mymodel`.
-   - If unauthenticated, direct the user to open `https://www.kiriengine.app/webapp`, complete login/registration, and confirm before continuing.
+   - **CRITICAL — Prevent Premature Browser Closing in Codex/CLI Environments**:
+     - **If launching default system browser**: MUST use detached execution so terminating the command does not kill the browser window:
+       - Windows: `powershell -Command "Start-Process 'https://www.kiriengine.app/webapp'"`
+       - macOS: `open "https://www.kiriengine.app/webapp"`
+       - Linux: `nohup xdg-open "https://www.kiriengine.app/webapp" >/dev/null 2>&1 &`
+     - **If using Playwright / Puppeteer automation scripts**:
+       - NEVER let the script exit immediately after navigation, otherwise context destruction closes the browser before the user can log in!
+       - MUST use a blocking wait for login completion:
+         ```python
+         # Wait up to 5 minutes (300s) for user to log in and reach the dashboard
+         page.wait_for_url("**/mymodel**", timeout=300000)
+         ```
+       - Inform user: `"Waiting for login at https://www.kiriengine.app/webapp. Browser will stay open until redirect to /mymodel is detected..."`
 
 2. **Run Lightweight Media Validation**:
    - Execute the cross-platform validator script:
