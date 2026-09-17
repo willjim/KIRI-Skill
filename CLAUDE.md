@@ -54,9 +54,9 @@ Run the lightweight cross-platform validation script:
 - If `valid: false`: Stop and report the exact limitation violation returned in JSON (e.g., photo count < 20 or > 300, video duration outside 3s–180s, or total size > 5 GB). Request valid files.
 - If `valid: true`: Output validation summary and proceed to Step 3.
 
-### Step 3: Ask for Reconstruction Mode
-Ask the user to select one of the three KIRI Engine reconstruction modes:
-1. **Photo Scan** (Standard photogrammetry for objects/scenes with rich texture)
+### Step 3: Ask for Reconstruction Mode via Interactive Menu
+Present an interactive choice menu for the user to click rather than type:
+1. **(Recommended) Photo Scan** (Standard photogrammetry for objects/scenes with rich texture)
 2. **Featureless Object Scan** (Specialized algorithm for featureless, smooth, or reflective objects)
 3. **3DGS Scan with Mesh** (3D Gaussian Splatting + Mesh generation)
 
@@ -65,13 +65,16 @@ Ask the user to select one of the three KIRI Engine reconstruction modes:
 2. Open the entry corresponding to the selected mode.
 3. Upload the validated photo files or video file via the upload interface.
 
-### Step 5: Configure Reconstruction Parameters
-Prompt the user for the following configuration settings:
-- **Model Name**: (Default to folder/file name, user can customize)
-- **Export Mesh Format**: Choose from `OBJ`, `FBX`, `STL`, `GLB`, `GLTF`, `USDZ`, `PLY`, `XYZ`
-- **Remove Background**: `Yes` / `No`
-- **Train AI**: `Agree` / `Disagree`
-- **Visibility**: `Public` / `Private`
+### Step 5: Configure Reconstruction Parameters via Interactive Menu
+Present interactive multi-choice menus for options:
+- **Export Mesh Format** (Multi-select checkboxes): `GLB`, `OBJ`, `FBX`, `USDZ`, `STL`, `GLTF`, `PLY`, `XYZ`
+- **Remove Background** (Single select): `No (Keep environment)` / `Yes (Remove background)`
+- **Train AI & Visibility** (Single select):
+  - `Agree to train AI, Visibility: Private`
+  - `Agree to train AI, Visibility: Public`
+  - `Disagree to train AI, Visibility: Private`
+  - `Disagree to train AI, Visibility: Public`
+- **Model Name**: Default to folder or filename (editable)
 
 ### Step 6: Submit & Completion Reminder
 1. Submit the scan task.

@@ -29,21 +29,21 @@ Activate this workflow when the user says:
      - Video: 1 file, 3 seconds to 180 seconds (3 mins), size ≤ 5 GB.
    - If invalid: Alert the user with the exact error details and prompt for valid input.
 
-3. **Prompt for Reconstruction Mode**:
-   - Offer the 3 modes:
-     1. `Photo Scan`
+3. **Prompt for Reconstruction Mode via Interactive Menu**:
+   - Use interactive choice UI (single select) for:
+     1. `(Recommended) Photo Scan`
      2. `Featureless Object Scan`
      3. `3DGS Scan with Mesh`
 
 4. **Upload to WebApp**:
    - Access `https://www.kiriengine.app/webapp/mymodel` and upload the validated files into the corresponding mode entrypoint.
 
-5. **Inquire Model Options**:
-   - Model Name (default to file/folder basename)
-   - Mesh Export Format: `OBJ`, `FBX`, `STL`, `GLB`, `GLTF`, `USDZ`, `PLY`, `XYZ`
-   - Remove Background: `Yes` / `No`
-   - Train AI: `Agree` / `Disagree`
-   - Visibility: `Public` / `Private`
+5. **Inquire Model Options via Interactive Menu**:
+   - Present selectable UI options for:
+     - Mesh Export Format (multi-select): `GLB`, `OBJ`, `FBX`, `USDZ`, `STL`, `GLTF`, `PLY`, `XYZ`
+     - Remove Background (single-select): `No` / `Yes`
+     - Train AI & Visibility (single-select): Agree/Disagree & Private/Public combinations
+     - Model Name: Default to file/folder basename
 
 6. **Submit and 10-Minute Reminder**:
    - Submit the task.
