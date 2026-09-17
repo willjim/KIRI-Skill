@@ -68,12 +68,9 @@ Present an interactive choice menu for the user to click rather than type:
 ### Step 5: Configure Reconstruction Parameters via Interactive Menu
 Present interactive multi-choice menus for options:
 - **Export Mesh Format** (Multi-select checkboxes): `GLB`, `OBJ`, `FBX`, `USDZ`, `STL`, `GLTF`, `PLY`, `XYZ`
-- **Remove Background** (Single select): `No (Keep environment)` / `Yes (Remove background)`
-- **Train AI & Visibility** (Single select):
-  - `Agree to train AI, Visibility: Private`
-  - `Agree to train AI, Visibility: Public`
-  - `Disagree to train AI, Visibility: Private`
-  - `Disagree to train AI, Visibility: Public`
+- **Remove Background** (Single select, 2 choices): `No (Keep environment)` / `Yes (Remove background)`
+- **Train AI** (Single select, 2 choices): `Agree` / `Disagree`
+- **Visibility** (Single select, 2 choices): `Private` / `Public`
 - **Model Name**: Default to folder or filename (editable)
 
 ### Step 6: Submit & Completion Reminder

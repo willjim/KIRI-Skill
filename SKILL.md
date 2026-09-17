@@ -102,15 +102,16 @@ Agent 在执行校验前，可快速检查环境：
 
 1. **导出 Mesh 格式 (Mesh Export Format)**（支持多选）：
    - `GLB`、`OBJ`、`FBX`、`USDZ`、`STL`、`GLTF`、`PLY`、`XYZ`
-2. **Remove Background（是否去除背景）**（单选）：
-   - `否（保留原始环境与背景）`
+2. **Remove Background（是否去除背景）**（单选，两选一）：
+   - `(Recommended) 否（保留原始环境与背景）`
    - `是（使用 AI 自动抠除背景，仅保留主体）`
-3. **Train AI 与 Visibility（AI 训练与可见性组合）**（单选）：
-   - `同意参与 AI 训练，模型设为 Private（私密）`
-   - `同意参与 AI 训练，模型设为 Public（公开）`
-   - `不同意参与 AI 训练，模型设为 Private（私密）`
-   - `不同意参与 AI 训练，模型设为 Public（公开）`
-4. **模型名称 (Model Name)**：默认采用所选文件或文件夹名（可在问卷中默认填入，支持自定义输入）。
+3. **Train AI（是否同意数据参与 AI 训练）**（单选，两选一）：
+   - `(Recommended) 同意`
+   - `不同意`
+4. **Visibility（模型公开可见性）**（单选，两选一）：
+   - `(Recommended) Private（私密 / 仅自己可见）`
+   - `Public（公开分享）`
+5. **模型名称 (Model Name)**：默认采用所选文件或文件夹名（支持自定义输入）。
 
 ---
 

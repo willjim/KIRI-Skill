@@ -41,8 +41,9 @@ Activate this workflow when the user says:
 5. **Inquire Model Options via Interactive Menu**:
    - Present selectable UI options for:
      - Mesh Export Format (multi-select): `GLB`, `OBJ`, `FBX`, `USDZ`, `STL`, `GLTF`, `PLY`, `XYZ`
-     - Remove Background (single-select): `No` / `Yes`
-     - Train AI & Visibility (single-select): Agree/Disagree & Private/Public combinations
+     - Remove Background (single-select 2 choices): `No` / `Yes`
+     - Train AI (single-select 2 choices): `Agree` / `Disagree`
+     - Visibility (single-select 2 choices): `Private` / `Public`
      - Model Name: Default to file/folder basename
 
 6. **Submit and 10-Minute Reminder**:
